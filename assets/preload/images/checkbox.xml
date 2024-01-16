@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="checkbox.png">
+<SubTexture name="off0000" x="0" y="0" width="410" height="412" frameX="-5" frameY="-3" frameWidth="400" frameHeight="400" />
+<SubTexture name="on0000" x="410" y="0" width="410" height="412" frameX="-5" frameY="-3" frameWidth="400" frameHeight="400" />
+</TextureAtlas>
