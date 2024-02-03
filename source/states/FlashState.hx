@@ -35,21 +35,14 @@ class FlashState extends MusicBeatState
 
     var coolStartingTrans:FlxSprite;
 
-    var coolMouse:FlxSprite;
-
     
     override function create()
     {
-        FlxG.mouse.visible = false;
 
         if (FlxG.save.data.countVisit == null)
             FlxG.save.data.countVisit = 0;
         else
             FlxG.save.data.countVisit++;
-
-        coolMouse = new FlxSprite(0, 0).loadGraphic(Paths.image('ItStealsCursor'));
-        coolMouse.antialiasing = ClientPrefs.data.antialiasing;
-        coolMouse.scale.set(0.8, 0.8);
 
 
         bgThingy = new FlxSprite();
@@ -138,17 +131,12 @@ class FlashState extends MusicBeatState
         coolStartingTrans.alpha = 0.5;
         add(coolStartingTrans);
         super.create();
-
-        
-
-        add(coolMouse);
     }
 
     override function update(elapsed:Float)
     {
         coolStartingTrans.alpha -= elapsed * 2;
-        coolMouse.x = FlxG.mouse.screenX;
-        coolMouse.y = FlxG.mouse.screenY;
+        
         super.update(elapsed);
 
         if (!thereIs3ofThem)

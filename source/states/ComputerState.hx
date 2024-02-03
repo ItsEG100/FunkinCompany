@@ -50,13 +50,9 @@ class ComputerState extends MusicBeatState
         '2       52    Jo152          h512\n2       52    Sa5155         h512\n2       52    Bo75           h512\n2       52    Eri510         h512\n1       36    Ell567         h512\n1       36    Jos912         h512\n0',
     ];
 
-    var coolMouse:FlxSprite;
-
     override function create()
     {
-        coolMouse = new FlxSprite(0, 0).loadGraphic(Paths.image('ItStealsCursor'));
-        coolMouse.antialiasing = ClientPrefs.data.antialiasing;
-        coolMouse.scale.set(0.8, 0.8);
+        FlxG.save.data.fromMenu = true;
 
         halfGroup = new FlxGroup();
         add(halfGroup);
@@ -170,8 +166,6 @@ class ComputerState extends MusicBeatState
 
         super.create();
 
-        add(coolMouse);
-
         new FlxTimer().start(0.1, function(tmr:FlxTimer)
 		{
 			startIntro(1);
@@ -180,8 +174,7 @@ class ComputerState extends MusicBeatState
 
     override function update(elapsed:Float)
     {
-        coolMouse.x = FlxG.mouse.screenX;
-        coolMouse.y = FlxG.mouse.screenY;
+        
         super.update(elapsed);
     }
 

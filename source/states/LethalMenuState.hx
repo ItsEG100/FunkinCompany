@@ -47,15 +47,10 @@ class LethalMenuState extends MusicBeatState
 
     var vinn:FlxSprite;
 
-    var coolMouse:FlxSprite;
     var menuThing:FlxTween;
 
     override function create()
     {
-
-        coolMouse = new FlxSprite(0, 0).loadGraphic(Paths.image('ItStealsCursor'));
-        coolMouse.antialiasing = ClientPrefs.data.antialiasing;
-        coolMouse.scale.set(0.8, 0.8);
 
         yoooBg = new FlxSprite();
 		yoooBg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -149,16 +144,21 @@ class LethalMenuState extends MusicBeatState
         vers.antialiasing = ClientPrefs.data.antialiasing;
         add(vers);
 
-        vinn = new FlxSprite(0,0).loadGraphic(Paths.image('vin'));
+        vinn = new FlxSprite(0,0    ).loadGraphic(Paths.image('vin'));
         vinn.antialiasing = ClientPrefs.data.antialiasing;
         vinn.alpha = 0.4;
         vinn.color = 0xFF040000;
         add(vinn);
 
         super.create();
-        FlxG.camera.setScale(0.001, 0.001);
 
-        add(coolMouse);
+        if (FlxG.save.data.fromMenu)
+        {
+            FlxG.camera.setScale(0.001, 0.001);
+            FlxG.save.data.fromMenu = false;
+        }
+        else
+            changeScale = false;
 
         if(FlxG.sound.music != null) FlxG.sound.music.fadeIn(4, 0, 0.7);
     }
@@ -205,8 +205,7 @@ class LethalMenuState extends MusicBeatState
             
         }
             
-        coolMouse.x = FlxG.mouse.screenX;
-        coolMouse.y = FlxG.mouse.screenY;
+        
         super.update(elapsed);
 
         if (!windowsDeath)

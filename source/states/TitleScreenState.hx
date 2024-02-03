@@ -1,5 +1,6 @@
 package states;
 
+import backend.ClientPrefs;
 import backend.WeekData;
 import backend.Highscore;
 
@@ -40,8 +41,6 @@ class TitleScreenState extends MusicBeatState
 	var madeText:FlxText;
 	var madeLogo:FlxSprite;
 	var logo:FlxSprite;
-
-	var coolMouse:FlxSprite = new FlxSprite().loadGraphic('assets/images/ItStealsCursor.png');
 
 
 	override public function create()	
@@ -90,7 +89,6 @@ class TitleScreenState extends MusicBeatState
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
 
-		FlxG.mouse.visible = false;
 		if (initialized)
 			startIntro();
 		else
@@ -108,6 +106,43 @@ class TitleScreenState extends MusicBeatState
 
 	function startIntro()
 	{
+
+		if (ClientPrefs.data.framerate < 30 || ClientPrefs.data.framerate <= 45)
+		{
+            ClientPrefs.data.framerate = 30;
+			FlxG.save.data.framerateV = 0;
+		}
+        else if (ClientPrefs.data.framerate > 45 || ClientPrefs.data.framerate <= 90)
+		{
+            ClientPrefs.data.framerate = 60;
+			FlxG.save.data.framerateV = 1;
+		}
+        else if (ClientPrefs.data.framerate > 90 || ClientPrefs.data.framerate <= 132)
+		{
+            ClientPrefs.data.framerate = 120;
+			FlxG.save.data.framerateV = 2;
+		}
+        else if (ClientPrefs.data.framerate > 132 || ClientPrefs.data.framerate <= 192)
+		{
+            ClientPrefs.data.framerate = 144;
+			FlxG.save.data.framerateV = 3;
+		}
+        else if (ClientPrefs.data.framerate > 192)
+		{
+            ClientPrefs.data.framerate = 240;
+			FlxG.save.data.framerateV = 4;
+		}
+        else
+		{
+            ClientPrefs.data.framerate = 60;
+			FlxG.save.data.framerateV = 1;
+		}
+
+		if (ClientPrefs.data.downScroll)
+			FlxG.save.data.downScrollV = 1;
+		else
+			FlxG.save.data.downScrollV = 0;
+
 		if (!initialized)
 		{
 			if(FlxG.sound.music == null) {
