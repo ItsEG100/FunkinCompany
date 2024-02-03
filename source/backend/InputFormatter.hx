@@ -90,6 +90,8 @@ class InputFormatter {
 				return "PrtScrn";
 			case NONE:
 				return '---';
+			case BACKSLASH:
+				return 'BckSlash';
 			default:
 				var label:String = Std.string(key);
 				if(label.toLowerCase() == 'null') return '---';
